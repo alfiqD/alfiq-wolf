@@ -31,5 +31,5 @@ Route::get('/about', function () {
     return view('halaman-about');
 });
 Route::get('/matakuliah/{param1}', [MatakuliahController::class, 'show']);
-
+//tes?
 
