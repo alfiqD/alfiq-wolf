@@ -168,11 +168,11 @@
                             <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $errors }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
-                    </div>
-                    @endif
+                            </div>
+                         @endif
 
                     <form action="{{ route('question.store') }}" method="POST">
                         @csrf
