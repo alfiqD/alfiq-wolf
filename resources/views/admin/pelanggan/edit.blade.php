@@ -45,7 +45,7 @@
                 <div class="card-body">
 
                     {{-- Penyesuaian form: action, method, csrf --}}
-                    <form action="{{ route('pelanggan.store', $dataPelanggan->id) }}" method="POST">
+                        <form action="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
