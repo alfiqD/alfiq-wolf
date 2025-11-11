@@ -76,8 +76,8 @@ class PelangganController extends Controller
         $pelanggan->phone      = $request->phone;
 
         $pelanggan->save();
-       return redirect()->route('pelanggan.show', $pelanggan->id)
-                 ->with('success', 'Data pelanggan berhasil diubah!');
+            return redirect()->route('pelanggan.index')
+            ->with('success', 'Data pelanggan berhasil diubah!');
 
     }
 

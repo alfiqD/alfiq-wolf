@@ -19,114 +19,105 @@
                 <li class="breadcrumb-item active" aria-current="page">Tambah Pelanggan</li>
             </ol>
         </nav>
-        <div class="d-flex justify-content-between w-100 flex-wrap">
-            <div class="mb-3 mb-lg-0">
-                <h1 class="h4">Tambah Pelanggan</h1>
-                <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
-            </div>
-            <div>
-                <a href="{{ route('pelanggan.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i>
-                    Kembali</a>
-            </div>
+           <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h4">Tambah Pelanggan</h1>
+            <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
+        </div>
+        <div>
+            <a href="{{ route('pelanggan.index') }}" class="btn btn-primary">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
         </div>
     </div>
+</div>
 
-    {{-- notif berhasil --}}
-    @if (session('success'))
-        <div class="alert alert-info">
-            {!! session('success') !!}
-        </div>
-    @endif
-    {{-- notif berhasil --}}
-    @if (session('delete'))
-        <div class="alert alert-info">
-            {!! session('delete') !!}
-        </div>
-    @endif
+{{-- notif berhasil --}}
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
 
-    <div class="row">
-        <div class="col-12 mb-4">
-            <div class="card border-0 shadow components-section">
-                <div class="card-body">
-                    {{-- Penyesuaian form: action, method, csrf --}}
-                    <form action="{{ route('pelanggan.store') }}" method="POST">
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+            <div class="card-body">
+                {{-- Form simpan data pelanggan --}}
+                <form action="{{ route('pelanggan.store') }}" method="POST">
                     @csrf
 
-                        <div class="row mb-4">
-                            <div class="col-lg-4 col-sm-6">
-                                {{-- First Name --}}
-                                <div class="mb-3">
-                                    <label for="first_name" class="form-label">First name</label>
-                                    {{-- Penyesuaian: name dan old() --}}
-                                    <input type="text" id="first_name" name="first_name" class="form-control"
-                                        value="{{ old('first_name') }}" required>
-                                </div>
-
-                                {{-- Last Name --}}
-                                <div class="mb-3">
-                                    <label for="last_name" class="form-label">Last name</label>
-                                    {{-- Penyesuaian: name dan old() --}}
-                                    <input type="text" id="last_name" name="last_name" class="form-control"
-                                        value="{{ old('last_name') }}" required>
-                                </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-4 col-sm-6">
+                            {{-- First Name --}}
+                            <div class="mb-3">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" id="first_name" name="first_name" class="form-control"
+                                    placeholder="Masukkan nama depan" value="{{ old('first_name') }}" required>
                             </div>
 
-                            <div class="col-lg-4 col-sm-6">
-                                {{-- Birthday --}}
-                                <div class="mb-3">
-                                    <label for="birthday" class="form-label">Birthday</label>
-                                    {{-- Penyesuaian: name dan old() --}}
-                                    <input type="date" id="birthday" name="birthday" class="form-control"
-                                        value="{{ old('birthday') }}">
-                                </div>
-
-                                {{-- Gender --}}
-                                <div class="mb-3">
-                                    <label for="gender" class="form-label">Gender</label>
-                                    {{-- Penyesuaian: old() untuk select --}}
-                                    <select id="gender" name="gender" class="form-select">
-                                        <option value="">-- Pilih --</option>
-                                        <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>
-                                            Male</option>
-                                        <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>
-                                            Female</option>
-                                        <option value="Other" {{ old('gender') == 'Other' ? 'selected' : '' }}>
-                                            Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-sm-12">
-                                {{-- Email --}}
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    {{-- Penyesuaian: name dan old() --}}
-                                    <input type="email" id="email" name="email" class="form-control"
-                                        value="{{ old('email') }}" required>
-                                </div>
-
-                                {{-- Phone --}}
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone</label>
-                                    {{-- Penyesuaian: name dan old() --}}
-                                    <input type="text" id="phone" name="phone" class="form-control"
-                                        value="{{ old('phone') }}">
-                                </div>
-
-                                {{-- Buttons --}}
-                                <div class="">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                    {{-- Penyesuaian href tombol "Batal" --}}
-                                    <a href="{{ route('pelanggan.index') }}"
-                                        class="btn btn-outline-secondary ms-2">Batal</a>
-                                </div>
+                            {{-- Last Name --}}
+                            <div class="mb-3">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" class="form-control"
+                                    placeholder="Masukkan nama belakang" value="{{ old('last_name') }}" required>
                             </div>
                         </div>
-                    </form>
-                </div>
 
+                        <div class="col-lg-4 col-sm-6">
+                            {{-- Birthday --}}
+                            <div class="mb-3">
+                                <label for="birthday" class="form-label">Birthday</label>
+                                <input type="date" id="birthday" name="birthday" class="form-control"
+                                    value="{{ old('birthday') }}">
+                            </div>
+
+                            {{-- Gender --}}
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select id="gender" name="gender" class="form-select" required>
+                                    <option value="">-- Pilih Gender --</option>
+                                    <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                                    <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                                    <option value="Other" {{ old('gender') == 'Other' ? 'selected' : '' }}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-12">
+                            {{-- Email --}}
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="Masukkan email aktif" value="{{ old('email') }}" required>
+                            </div>
+
+                            {{-- Phone --}}
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" id="phone" name="phone" class="form-control"
+                                    placeholder="Masukkan nomor telepon" value="{{ old('phone') }}">
+                            </div>
+
+                            {{-- Buttons --}}
+                            <div class="d-flex align-items-center mt-3">
+                                <button type="submit" class="btn btn-success me-2">
+                                    <i class="fas fa-save me-1"></i> Simpan
+                                </button>
+                                <a href="{{ route('pelanggan.index') }}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-times me-1"></i> Batal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
+</div>
+{{-- end main content --}}
+
     {{-- endmaincontent --}}
 @endsection
