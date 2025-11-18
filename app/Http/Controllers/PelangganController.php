@@ -12,7 +12,12 @@ class PelangganController extends Controller
     public function index(Request $request)
     {
         $filterableCollums = ['gender'];
-        $data['dataPelanggan'] = Pelanggan::filter($request, $filterableCollums)->paginate(10);
+        $searchTableCollums=['first_name'];
+
+        $data['dataPelanggan'] = Pelanggan::filter($request, $filterableCollums)
+        ->search($request, $searchTableCollums)
+        ->paginate(10)
+        ->withQueryString();
 
         return view('admin.pelanggan.index', $data);
     }
