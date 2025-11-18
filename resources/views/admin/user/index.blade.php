@@ -68,7 +68,7 @@
                                             <th class="border-0 rounded-end">Action</th>
 
                                             <td>
-                                                <a href="{{ route('user.edit', $item->id) }}"
+                                                <a href="{{ route('user.edit', $item->pelanggan_id) }}"
                                                     class="btn btn-info btn-sm">
                                                     <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
                                                         stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"

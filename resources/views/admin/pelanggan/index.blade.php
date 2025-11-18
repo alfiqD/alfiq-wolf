@@ -51,6 +51,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="table-pelanggan" class="table table-centered table-nowrap mb-0 rounded">
+
+
                             <thead class="thead-light">
                                 <tr>
                                     <th class="border-0">First Name</th>
@@ -104,10 +106,15 @@
 
                             </tbody>
                         </table>
+<div class="mt-3">
+        {{ $dataPelanggan->links('pagination::bootstrap-5') }}
+    </div>
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
     {{-- end main content --}}
 @endsection
