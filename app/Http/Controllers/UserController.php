@@ -71,20 +71,30 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $user_id = $id;
-        $user    = user::findOrFail($user_id);
+    public function update(Request $request, User $user)
+{
+    $data = $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email',
+        'profile_picture' => 'nullable|image|max:2048'
+    ]);
 
-        $user->name     = $request->name;
-        $user->email    = $request->email;
-        $user->password = $request->password;
+    if ($request->hasFile('profile_picture')) {
+        // hapus file lama kalau ada
+        if($user->profile_picture && Storage::exists('public/profile/'.$user->profile_picture)){
+            Storage::delete('public/profile/'.$user->profile_picture);
+        }
 
-        $user->save();
-        return redirect()->route('user.index')
-            ->with('success', 'Data user berhasil diubah!');
-
+        $file = $request->file('profile_picture');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $file->storeAs('public/profile', $filename);
+        $data['profile_picture'] = $filename;
     }
+
+    $user->update($data);
+
+    return redirect()->back()->with('success','Profil diperbarui.');
+}
     /**
      * Remove the specified resource from storage.
      */

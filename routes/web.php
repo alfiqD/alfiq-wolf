@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\MatakuliahController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,3 +56,8 @@ Route::resource('pelanggan', PelangganController::class);
 Route::resource('user', UserController::class);
 
 
+Route::resource('customer', CustomerController::class);
+
+// Detail + upload file
+Route::get('customer/{id}/detail', [CustomerController::class, 'detail'])->name('customer.detail');
+Route::delete('customer/file/{id}', [CustomerController::class, 'deleteFile'])->name('customer.deleteFile');
