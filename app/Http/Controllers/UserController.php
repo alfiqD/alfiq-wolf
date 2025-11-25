@@ -28,15 +28,27 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $data['name']     = $request->name;
-        $data['email']    = $request->email;
-        $data['password'] = Hash::make($request->password);
+{
+    $request->validate([
+        'name'     => 'required',
+        'email'    => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+        'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        User::create($data);
+    $data['name']     = $request->name;
+    $data['email']    = $request->email;
+    $data['password'] = Hash::make($request->password);
 
-        return redirect()->route('user.index')->with('success', 'Penambahan Data Berhasil!');
+    // Upload Foto
+    if ($request->hasFile('profile_picture')) {
+        $data['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
     }
+
+    User::create($data);
+
+    return redirect()->route('user.index')->with('success', 'Penambahan Data Berhasil!');
+}
 
     /**
      * Display the specified resource.

@@ -44,9 +44,12 @@
                 <div class="card-body">
 
                     {{-- Penyesuaian form: action, method, csrf --}}
-                    <form action="{{ route('user.update', $dataUser->id) }}" method="POST">
+                    <form action="{{ route('user.update', $dataUser->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+
+
 
                         <div class="row mb-4">
                             <div class="col-lg-4 col-sm-6">
@@ -65,6 +68,22 @@
                                     <input type="email" id="email" name="email" class="form-control"
                                         value="{{ $dataUser->email }}" required>
                                 </div>
+                                                     {{-- Foto lama --}}
+    @if ($dataUser->profile_picture)
+        <div class="mb-3">
+            <label class="form-label">Foto Profil Saat Ini</label><br>
+            <img src="{{ asset('storage/profile/' . $dataUser->profile_picture) }}"
+                 width="120" class="rounded mb-2">
+            <br>
+            <small class="text-muted">Biarkan kosong jika tidak ingin mengganti foto.</small>
+        </div>
+    @endif
+
+    {{-- Upload foto baru --}}
+    <div class="mb-3">
+        <label for="profile_picture" class="form-label">Foto Profil Baru</label>
+        <input type="file" name="profile_picture" id="profile_picture" class="form-control">
+    </div>
                             </div>
 
                             <div class="col-lg-4 col-sm-6">
